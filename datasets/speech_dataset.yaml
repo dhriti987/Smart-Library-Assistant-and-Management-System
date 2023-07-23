@@ -1,0 +1,106 @@
+# Search by Book Title Intent
+---
+type: intent
+name: searchBook
+slots:
+  - name: book
+    entity: book
+utterances:
+  - find me [book](Bridget Jones's Diary)
+  - find me a book named [book](Hunger Games)
+  - can you help me to find [book](A Darkness More Than Night)
+  - where can i find [book](Harry Potter and The Philosopher's Stone)
+  - where is [book](M for Malice) located
+  - I want to know where is [book](The Secret Life of Bees)
+  - I am looking for [book](All Creatures Great and Small)
+
+# Search By Book's Author Intent
+---
+type: intent
+name: searchByAuthor
+slots:
+  - name: author
+    entity: author
+utterances:
+  - Can you suggest a book by [author](JK Rowlings)
+  - What are some books by [author](Sandra Brown) that you'd suggest
+  - Which [author](Margaret Yorke)'s book do you think I should read
+  - Could you suggest a book that written by [author](Sara Paretsky)
+  - list some books by [author](Dan Brown)
+  - What are [author](Sandra Brown)'s most popular books you recommend
+
+# Summarize book
+---
+type: intent
+name: summarizeBook
+slots:
+  - name: book
+    entity: book
+utterances:
+  - Can you summarize [book](A Darkness More Than Night)
+  - What's the summary of [book](M for Malice)
+  - What can you tell me about [book](The Secret Life of Bees)
+  - Can you tell me the plot of [book](All Creatures Great and Small)
+  - Tell me about the [book](Bridget Jones's Diary)
+  - Can you give me an overview of the [book](Harry Potter and The Prisoner of Azkaban)
+  - I want to know about [book](Roses are Red)
+
+# Search Book By Genre
+---
+type: intent
+name: searchByGenre
+slots:
+  - name: genre
+    entity: genre
+utterances:
+  - Suggest me a good [genre](fiction) book
+  - I am looking for some [genre](crime) books to read.
+  - I am in mood for a [genre](mystery) book.
+  - Can you recommend some [genre](juvenile Ffction) books
+  - I want to read an [genre](adventure) book
+  - Can you suggest me some [genre](science fiction) books to read?
+
+## Entities
+# Book Entity
+---
+type: entity
+name: book
+automatically_extensible: yes
+values:
+  - Harry Potter and The Philosopher's Stone
+  - The Secret Life of Bees
+  - M for Malice
+  - Bridget Jones's Diary
+  - A Darkness More Than Night
+  - All Creatures Great and Small
+  - Harry Potter and The Prisoner of Azkaban
+  - Roses are Red
+  - Hunger Games
+  
+# Author Entity
+---
+type: entity
+name: author
+automatically_extensible: yes
+values:
+  - JK Rowlings
+  - Sandra Brown
+  - Tom Clancy
+  - Margaret Yorke
+  - Sara Paretsky
+  - Dan Brown
+
+# Genre Entity
+---
+type: entity
+name: genre
+automatically_extensible: yes
+values:
+  - fiction
+  - [crime, crime fiction]
+  - [biography, bio]
+  - adventure
+  - juvenile fiction
+  - [science fiction, sci fi, sci-fi]
+  - mystery
+  - romance

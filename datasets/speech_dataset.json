@@ -1,0 +1,485 @@
+{
+  "entities": {
+    "author": {
+      "automatically_extensible": true,
+      "data": [
+        {
+          "synonyms": [],
+          "value": "JK Rowlings"
+        },
+        {
+          "synonyms": [],
+          "value": "Sandra Brown"
+        },
+        {
+          "synonyms": [],
+          "value": "Tom Clancy"
+        },
+        {
+          "synonyms": [],
+          "value": "Margaret Yorke"
+        },
+        {
+          "synonyms": [],
+          "value": "Sara Paretsky"
+        },
+        {
+          "synonyms": [],
+          "value": "Dan Brown"
+        }
+      ],
+      "matching_strictness": 1.0,
+      "use_synonyms": true
+    },
+    "book": {
+      "automatically_extensible": true,
+      "data": [
+        {
+          "synonyms": [],
+          "value": "Harry Potter and The Philosopher's Stone"
+        },
+        {
+          "synonyms": [],
+          "value": "The Secret Life of Bees"
+        },
+        {
+          "synonyms": [],
+          "value": "M for Malice"
+        },
+        {
+          "synonyms": [],
+          "value": "Bridget Jones's Diary"
+        },
+        {
+          "synonyms": [],
+          "value": "A Darkness More Than Night"
+        },
+        {
+          "synonyms": [],
+          "value": "All Creatures Great and Small"
+        },
+        {
+          "synonyms": [],
+          "value": "Harry Potter and The Prisoner of Azkaban"
+        },
+        {
+          "synonyms": [],
+          "value": "Roses are Red"
+        },
+        {
+          "synonyms": [],
+          "value": "Hunger Games"
+        }
+      ],
+      "matching_strictness": 1.0,
+      "use_synonyms": true
+    },
+    "genre": {
+      "automatically_extensible": true,
+      "data": [
+        {
+          "synonyms": [],
+          "value": "fiction"
+        },
+        {
+          "synonyms": [
+            "crime fiction"
+          ],
+          "value": "crime"
+        },
+        {
+          "synonyms": [
+            "bio"
+          ],
+          "value": "biography"
+        },
+        {
+          "synonyms": [],
+          "value": "adventure"
+        },
+        {
+          "synonyms": [],
+          "value": "juvenile fiction"
+        },
+        {
+          "synonyms": [
+            "sci fi",
+            "sci-fi"
+          ],
+          "value": "science fiction"
+        },
+        {
+          "synonyms": [],
+          "value": "mystery"
+        },
+        {
+          "synonyms": [],
+          "value": "romance"
+        }
+      ],
+      "matching_strictness": 1.0,
+      "use_synonyms": true
+    }
+  },
+  "intents": {
+    "searchBook": {
+      "utterances": [
+        {
+          "data": [
+            {
+              "text": "find me "
+            },
+            {
+              "entity": "book",
+              "slot_name": "book",
+              "text": "Bridget Jones's Diary"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "find me a book named "
+            },
+            {
+              "entity": "book",
+              "slot_name": "book",
+              "text": "Hunger Games"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "can you help me to find "
+            },
+            {
+              "entity": "book",
+              "slot_name": "book",
+              "text": "A Darkness More Than Night"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "where can i find "
+            },
+            {
+              "entity": "book",
+              "slot_name": "book",
+              "text": "Harry Potter and The Philosopher's Stone"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "where is "
+            },
+            {
+              "entity": "book",
+              "slot_name": "book",
+              "text": "M for Malice"
+            },
+            {
+              "text": " located"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "I want to know where is "
+            },
+            {
+              "entity": "book",
+              "slot_name": "book",
+              "text": "The Secret Life of Bees"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "I am looking for "
+            },
+            {
+              "entity": "book",
+              "slot_name": "book",
+              "text": "All Creatures Great and Small"
+            }
+          ]
+        }
+      ]
+    },
+    "searchByAuthor": {
+      "utterances": [
+        {
+          "data": [
+            {
+              "text": "Can you suggest a book by "
+            },
+            {
+              "entity": "author",
+              "slot_name": "author",
+              "text": "JK Rowlings"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "What are some books by "
+            },
+            {
+              "entity": "author",
+              "slot_name": "author",
+              "text": "Sandra Brown"
+            },
+            {
+              "text": " that you'd suggest"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "Which "
+            },
+            {
+              "entity": "author",
+              "slot_name": "author",
+              "text": "Margaret Yorke"
+            },
+            {
+              "text": "'s book do you think I should read"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "Could you suggest a book that written by "
+            },
+            {
+              "entity": "author",
+              "slot_name": "author",
+              "text": "Sara Paretsky"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "list some books by "
+            },
+            {
+              "entity": "author",
+              "slot_name": "author",
+              "text": "Dan Brown"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "What are "
+            },
+            {
+              "entity": "author",
+              "slot_name": "author",
+              "text": "Sandra Brown"
+            },
+            {
+              "text": "'s most popular books you recommend"
+            }
+          ]
+        }
+      ]
+    },
+    "searchByGenre": {
+      "utterances": [
+        {
+          "data": [
+            {
+              "text": "Suggest me a good "
+            },
+            {
+              "entity": "genre",
+              "slot_name": "genre",
+              "text": "fiction"
+            },
+            {
+              "text": " book"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "I am looking for some "
+            },
+            {
+              "entity": "genre",
+              "slot_name": "genre",
+              "text": "crime"
+            },
+            {
+              "text": " books to read."
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "I am in mood for a "
+            },
+            {
+              "entity": "genre",
+              "slot_name": "genre",
+              "text": "mystery"
+            },
+            {
+              "text": " book."
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "Can you recommend some "
+            },
+            {
+              "entity": "genre",
+              "slot_name": "genre",
+              "text": "juvenile Ffction"
+            },
+            {
+              "text": " books"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "I want to read a "
+            },
+            {
+              "entity": "genre",
+              "slot_name": "genre",
+              "text": "adventure"
+            },
+            {
+              "text": " book"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "Can you suggest me some "
+            },
+            {
+              "entity": "genre",
+              "slot_name": "genre",
+              "text": "science fiction"
+            },
+            {
+              "text": " books to read?"
+            }
+          ]
+        }
+      ]
+    },
+    "summarizeBook": {
+      "utterances": [
+        {
+          "data": [
+            {
+              "text": "Can you summarize "
+            },
+            {
+              "entity": "book",
+              "slot_name": "book",
+              "text": "A Darkness More Than Night"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "What's the summary of "
+            },
+            {
+              "entity": "book",
+              "slot_name": "book",
+              "text": "M for Malice"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "What can you tell me about "
+            },
+            {
+              "entity": "book",
+              "slot_name": "book",
+              "text": "The Secret Life of Bees"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "Can you tell me the plot of "
+            },
+            {
+              "entity": "book",
+              "slot_name": "book",
+              "text": "All Creatures Great and Small"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "Tell me about the "
+            },
+            {
+              "entity": "book",
+              "slot_name": "book",
+              "text": "Bridget Jones's Diary"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "Can you give me an overview of the "
+            },
+            {
+              "entity": "book",
+              "slot_name": "book",
+              "text": "Harry Potter and The Prisoner of Azkaban"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "I want to know about "
+            },
+            {
+              "entity": "book",
+              "slot_name": "book",
+              "text": "Roses are Red"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "language": "en"
+}
