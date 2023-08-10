@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'rest_framework',
     
     'authentication',
+    'library',
+    'notes',
+    'ai'
+
 ]
 
 MIDDLEWARE = [
