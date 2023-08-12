@@ -48,7 +48,7 @@ class Review(models.Model):
 class BookRead(models.Model):
     books= models.ManyToManyField(Book,on_delete=models.CASCADE,related_name="books_readed") #ma
     
-    user = models.ManyToManyField(settings.AUTH_USER_MODEL,related_name="books_readed") #one to one books_readed
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,related_name="books_readed") #one to one books_readed
     #users = models.ForeignKey(User,on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     
