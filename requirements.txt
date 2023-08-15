@@ -3,6 +3,5 @@ pip-chill==1.0.3
 psycopg2==2.9.7
 python-decouple==3.8
 snips-nlu==0.20.2
-snips-nlu-en==0.2.3
 tzdata==2023.3
 wincertstore==0.2
