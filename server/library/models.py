@@ -22,8 +22,8 @@ class Book(models.Model):
     isbn = models.CharField(max_length=17)
     description = models.TextField()
     number_of_ratings = models.IntegerField()
-    category  = models.ManyToManyField(Category)
-    author = models.ManyToManyField(Author,on_delete=models.CASCADE,related_name="books")
+    category  = models.ManyToManyField(Category, related_name="books")
+    author = models.ManyToManyField(Author,related_name="books")
     publisher = models.CharField(max_length = 200)
     year = models.CharField(max_length=4) 
     copies = models.IntegerField()
@@ -46,9 +46,9 @@ class Review(models.Model):
     #user = models.ForeignKey(User,on_delete=models.CASCADE)
 
 class BookRead(models.Model):
-    books= models.ManyToManyField(Book,on_delete=models.CASCADE) #ma
+    books= models.ManyToManyField(Book) #ma
     
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,related_name="books_readed") #one to one books_readed
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,related_name="books_readed", on_delete= models.CASCADE) #one to one books_readed
     #users = models.ForeignKey(User,on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     
