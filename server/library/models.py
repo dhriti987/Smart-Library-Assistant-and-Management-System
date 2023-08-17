@@ -41,14 +41,14 @@ class Review(models.Model):
     comment  = models.CharField(max_length=250)
     date = models.DateField(auto_now_add = True)
     rating = models.IntegerField()
-    book = models.ForeignKey(Book,on_delete=models.CASCADE,related_name="review")
+    book = models.ForeignKey(Book,on_delete=models.CASCADE,related_name="reviews")
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     #user = models.ForeignKey(User,on_delete=models.CASCADE)
 
 class BookRead(models.Model):
-    books= models.ManyToManyField(Book,on_delete=models.CASCADE,related_name="books_readed") #ma
+    books= models.ManyToManyField(Book,on_delete=models.CASCADE) #ma
     
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,related_name="book_read") #one to one books_readed
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,related_name="books_readed") #one to one books_readed
     #users = models.ForeignKey(User,on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     
@@ -57,7 +57,7 @@ class BookRead(models.Model):
         return self.users
     
 class Like(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name="likes")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name="liked_books")
     #user = models.ForeignKey(User,on_delete=models.CASCADE)
     book = models.ForeignKey(Book,on_delete=models.CASCADE,related_name="likes")
     date = models.DateTimeField(auto_now_add=True)
