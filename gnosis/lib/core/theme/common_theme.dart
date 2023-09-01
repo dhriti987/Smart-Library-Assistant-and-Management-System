@@ -27,5 +27,6 @@ ThemeData darkTheme = ThemeData(
       color: Colors.white,
     ),
     labelMedium: TextStyle(color: Colors.white),
+    titleMedium: TextStyle(color: Colors.black),
   ),
 );

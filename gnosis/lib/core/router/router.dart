@@ -4,7 +4,7 @@ import 'package:gnosis/features/home/UI/home.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
-  GoRouter getRouter(bool isSignIn) {
+  GoRouter getRouter() {
     GoRouter router = GoRouter(
       routes: [
         GoRoute(
@@ -23,9 +23,9 @@ class AppRouter {
         )
       ],
       redirect: (context, state) {
-        if (isSignIn) {
-          return null;
-        }
+        // if (isSignIn) {
+        //   return null;
+        // }
         return '/signin';
       },
     );
