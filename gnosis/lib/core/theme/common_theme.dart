@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-Color PRIMARY_COLOR = Color.fromARGB(250, 205, 97, 129);
+const Color primaryColor = Color.fromARGB(250, 205, 97, 129);
 ThemeData lightTheme = ThemeData();
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
-  primaryColor: PRIMARY_COLOR,
+  primaryColor: primaryColor,
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       foregroundColor: Colors.white,
-      backgroundColor: PRIMARY_COLOR,
+      backgroundColor: primaryColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
@@ -18,9 +18,9 @@ ThemeData darkTheme = ThemeData(
     border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
     filled: true,
     fillColor: Colors.white,
-    hintStyle: TextStyle(color: Colors.black),
+    hintStyle: const TextStyle(color: Colors.black),
   ),
-  textTheme: TextTheme(
+  textTheme:const  TextTheme(
     headlineLarge: TextStyle(
       fontSize: 28,
       fontWeight: FontWeight.bold,
