@@ -10,13 +10,13 @@ User = get_user_model()
 #
 class Author(models.Model):
     name = models.CharField(max_length=100)  
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
 class Category(models.Model):
     category = models.CharField(max_length=200)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.category
 
 class Book(models.Model):
@@ -48,21 +48,24 @@ class Review(models.Model):
     #user = models.ForeignKey(User,on_delete=models.CASCADE)
 
 class BookRead(models.Model):
-    books= models.ManyToManyField(Book) #ma
+    books= models.ManyToManyField(Book) 
     
     user = models.OneToOneField(settings.AUTH_USER_MODEL,related_name="books_readed", on_delete= models.CASCADE) #one to one books_readed
     #users = models.ForeignKey(User,on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     
-   
     def __str__(self):
-        return self.users
+        books_titles = ", ".join([book.title for book in self.books.all()])
+        return f"{self.user} has read {books_titles}"
     
 class Like(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name="liked_books")
     #user = models.ForeignKey(User,on_delete=models.CASCADE)
     book = models.ForeignKey(Book,on_delete=models.CASCADE,related_name="likes")
     date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user} likes {self.book}"
 
 class Borrow(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name="borrowed")
