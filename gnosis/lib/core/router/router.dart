@@ -2,9 +2,18 @@
 import 'package:gnosis/features/Sigin/UI/Sign_in.dart';
 import 'package:gnosis/features/home/UI/home.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AppRouter {
-  GoRouter getRouter(bool isSignIn) {
+  final SharedPreferences pref;
+
+  AppRouter({required this.pref});
+
+  bool checkIsAuthenticated(){
+    return pref.getString('token') != null;
+  }
+  
+  GoRouter getRouter() {
     GoRouter router = GoRouter(
       routes: [
         GoRoute(
@@ -23,7 +32,7 @@ class AppRouter {
         )
       ],
       redirect: (context, state) {
-        if (isSignIn) {
+        if (checkIsAuthenticated()) {
           return null;
         }
         return '/signin';
