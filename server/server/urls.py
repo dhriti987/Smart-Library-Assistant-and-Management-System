@@ -22,5 +22,6 @@ urlpatterns = [
     path('library/', include('library.urls')),
     path('notes/', include('notes.urls')),
     path('ai/', include('ai.urls')),
+    path('authentication/', include('authentication.urls')),
     
 ]
