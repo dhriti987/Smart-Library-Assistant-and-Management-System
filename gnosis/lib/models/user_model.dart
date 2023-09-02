@@ -6,7 +6,7 @@ class UserModel{
   UserModel({required this.name, required this.email});
 
   factory UserModel.fromJson(Map<String,dynamic> data){
-    return UserModel(name: data['name'], email: data['email']);
+    return UserModel(name: data['username'], email: data['email']);
   }
 
 }
