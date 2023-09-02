@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-
+from server.settings import AUTH_USER_MODEL
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -10,12 +10,10 @@ from .models import *
 from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth import get_user_model
 
 # rdz123
 
-@api_view(['GET'])
-def index(request):
-    return Response(data={'msg':"Hello Wolrd"},status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def getBook(request):
@@ -56,3 +54,35 @@ class GenreBooksAPIView(generics.ListAPIView):
         queryset = Book.objects.filter(category__category=category)
         
         return queryset
+    
+
+class MostLikedBooks(generics.ListAPIView):
+    serializer_class = BookSerializer
+    permission_classes = []
+    
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']  # Assuming 'user_id' is passed as a URL parameter
+        User = get_user_model() 
+        user = User.objects.get(id=user_id) 
+        # Retrieve the books liked by the user
+        liked_books = Like.objects.filter(user=user).values_list('book', flat=True)
+
+        # Return the queryset of liked books
+        return Book.objects.filter(id__in=liked_books)
+    
+
+
+class BooksReadByUser(generics.ListAPIView):
+    serializer_class = BookSerializer
+    permission_classes = []
+    
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']  # Assuming 'user_id' is passed as a URL parameter
+        User = get_user_model() 
+        user = User.objects.get(id=user_id) 
+       
+        books_read = BookRead.objects.filter(user=user).values_list('books', flat=True)
+
+        
+        return Book.objects.filter(id__in=books_read)
+
