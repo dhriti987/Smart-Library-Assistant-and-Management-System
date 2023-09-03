@@ -19,3 +19,6 @@ class UserSerializer(serializers.ModelSerializer):
             )
         
         return attrs
+    
+class EmailValidationSerializer(serializers.Serializer):
+    email = serializers.EmailField()

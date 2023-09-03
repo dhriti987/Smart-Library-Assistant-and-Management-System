@@ -5,6 +5,7 @@ urlpatterns = [
     path('', getBook),
     path('getBooks/',getBook),
     path('best-books/',TopRatedBookAPIView.as_view()),
+    path('recent-books/',MostRecentBooks.as_view()),
     path('liked-books/<user_id>',MostLikedBooks.as_view()),
     path('books-read/<user_id>',BooksReadByUser.as_view()),
   
