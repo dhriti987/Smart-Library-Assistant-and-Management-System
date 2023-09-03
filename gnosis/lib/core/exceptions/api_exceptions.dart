@@ -5,6 +5,7 @@ class ApiException implements Exception{
 
   ApiException({required this.exception});
   List<String> call(){
+    print(exception.response);
     print(exception.type);
     switch (exception.type) {
       case DioExceptionType.connectionError:

@@ -45,4 +45,7 @@ class BookModel {
       author: data['author']
     );
   }
+
+  static List<BookModel> listFromJson(List<dynamic> list) =>
+      List<BookModel>.from(list.map((e) => BookModel.fromJson(e)));
 }
