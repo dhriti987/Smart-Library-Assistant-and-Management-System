@@ -19,6 +19,14 @@ class ApiService {
     return apiOptions;
   }
 
+  BaseOptions getApiOptionsWithoutHeader() {
+    final apiOptions = BaseOptions(
+      baseUrl: dotenv.env['SERVER_URL'] ?? "http://127.0.0.1:8000",
+      connectTimeout: const Duration(seconds: 5),
+    );
+    return apiOptions;
+  }
+
   BaseOptions getImageApiOptions(){
     return BaseOptions(
     responseType: ResponseType.bytes,
@@ -31,6 +39,9 @@ class ApiService {
 
   Dio getApi(){
     return Dio(getApiOptions());
+  }
+  Dio getApiWithoutHeader(){
+    return Dio(getApiOptionsWithoutHeader());
   }
   Dio getImageApi(){
     return Dio(getImageApiOptions());
