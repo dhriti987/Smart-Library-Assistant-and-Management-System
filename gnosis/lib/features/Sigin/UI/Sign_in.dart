@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gnosis/features/Sigin/UI/forgot_password.dart';
+import 'package:gnosis/features/forgot_password/UI/forgot_password.dart';
 import 'package:gnosis/features/Sigin/bloc/signin_bloc.dart';
+import 'package:gnosis/service_locator.dart';
 import 'package:go_router/go_router.dart';
 
 class SignIn extends StatelessWidget {
@@ -12,7 +13,7 @@ class SignIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
-    final SigninBloc signinBloc = SigninBloc();
+    final SigninBloc signinBloc = sl<SigninBloc>();
 
     return BlocConsumer<SigninBloc, SigninState>(
       bloc: signinBloc,
@@ -25,6 +26,17 @@ class SignIn extends StatelessWidget {
         if (state is SigninToForgotPasswordPageActionState) {
           Navigator.push(context,
               MaterialPageRoute(builder: ((context) => ForgotPassword())));
+        }
+        if (state is SigninErrorState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Error Occured!"),
+              duration: Duration(seconds: 2),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.white,
+              padding: EdgeInsets.all(10),
+            ),
+          );
         }
       },
       builder: (context, state) {
@@ -88,6 +100,7 @@ class SignIn extends StatelessWidget {
                   margin: EdgeInsets.only(left: 20, right: 20),
                   child: TextField(
                     controller: passwordController,
+                    obscureText: true,
                     decoration: InputDecoration()
                         .applyDefaults(Theme.of(context).inputDecorationTheme)
                         .copyWith(hintText: 'Enter password'),
@@ -119,16 +132,16 @@ class SignIn extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       // context.go('/');
-                      signinBloc.add(SignInButtonClickedEvent());
+                      signinBloc.add(SignInButtonClickedEvent(
+                        email: emailController.text,
+                        password: passwordController.text,
+                      ));
                     },
                     child: Container(
                       padding: EdgeInsets.all(10),
                       child: Text(
                         'Login',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
+                        style: textTheme.labelLarge,
                       ),
                     ),
                   ),

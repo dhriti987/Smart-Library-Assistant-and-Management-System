@@ -20,13 +20,28 @@ ThemeData darkTheme = ThemeData(
     fillColor: Colors.white,
     hintStyle: const TextStyle(color: Colors.black),
   ),
-  textTheme:const  TextTheme(
+  textTheme: const TextTheme(
     headlineLarge: TextStyle(
       fontSize: 28,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     ),
-    labelMedium: TextStyle(color: Colors.white),
+    headlineMedium: TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
+    labelMedium: TextStyle(color: Colors.white,fontSize: 14),
     titleMedium: TextStyle(color: Colors.black),
+    labelLarge: TextStyle(
+      color: Colors.white,
+      fontSize: 20,
+    ),
   ),
+  appBarTheme: AppBarTheme(
+    backgroundColor: Colors.white10,
+  ),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    backgroundColor: Colors.white10,
+  )
 );
