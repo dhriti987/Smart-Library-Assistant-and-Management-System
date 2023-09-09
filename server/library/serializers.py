@@ -46,3 +46,4 @@ class BorrowSerializer(serializers.ModelSerializer):
     class Meta:
         model = Borrow
         fields = '__all__'
+
