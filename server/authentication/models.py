@@ -10,7 +10,7 @@ class UserManager(BaseUserManager):
         if email is None:
             raise ValueError("User Must Have Email")
         
-        user = self.model(email = self.normalize_email(email), name=name)
+        user = self.model(email = self.normalize_email(email), user_name=name)
         user.set_password(password)
         user.save()
         return user
@@ -18,7 +18,7 @@ class UserManager(BaseUserManager):
     def create_superuser(self,email,password=None):
         if password is None:
             raise ValueError("Password should not be None")
-        user = self.create_user(email,password)
+        user = self.create_user(email,password = password)
         user.is_superuser = True
         user.is_staff = True
         user.save()
