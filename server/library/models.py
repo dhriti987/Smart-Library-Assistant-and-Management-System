@@ -20,7 +20,7 @@ class Category(models.Model):
         return self.category
 
 class Book(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=255)
     isbn = models.CharField(max_length=17)
     description = models.TextField()
     number_of_ratings = models.IntegerField()
