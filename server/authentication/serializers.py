@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id','email','password']
+        fields = ['id','name','email','password']
 
     def validate(self,attrs):
         email = attrs.get('email',None)
@@ -19,6 +19,3 @@ class UserSerializer(serializers.ModelSerializer):
             )
         
         return attrs
-    
-class EmailValidationSerializer(serializers.Serializer):
-    email = serializers.EmailField()
