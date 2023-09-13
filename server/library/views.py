@@ -86,3 +86,9 @@ class BooksReadByUser(generics.ListAPIView):
         
         return Book.objects.filter(id__in=books_read)
 
+class MostRecentBooks(generics.ListAPIView):
+    permission_classes = []
+    serializer_class = BookSerializer
+    def get_queryset(self):
+        queryset = Book.objects.order_by('-created_at')[:5]
+        return queryset
