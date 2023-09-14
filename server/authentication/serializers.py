@@ -9,13 +9,17 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id','name','email','password']
+        fields = ['id','user_name','email','password']
 
     def validate(self,attrs):
         email = attrs.get('email',None)
+        print("Se emaj",email)
         if email is None:
             raise serializers.ValidationError(
                 'User Should Have email address'
             )
         
         return attrs
+    
+class EmailValidationSerializer(serializers.Serializer):
+    email = serializers.EmailField()
