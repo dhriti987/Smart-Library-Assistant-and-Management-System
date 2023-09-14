@@ -14,10 +14,10 @@ class Author(models.Model):
     date_of_birth = models.DateField(blank=True)
     wiki_link = models.URLField(blank=True)
     img_url = models.URLField(blank=True)
-
+    
     def __str__(self) -> str:
         return self.name
-
+    
 class Category(models.Model):
     category = models.CharField(max_length=200)
 
