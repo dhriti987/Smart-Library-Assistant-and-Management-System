@@ -23,19 +23,20 @@ def getBook(request):
 
 
 class TopRatedBookAPIView(generics.ListCreateAPIView):
-    queryset = Book.objects.order_by('-number_of_ratings')[:5]
     serializer_class = BookSerializer
     permission_classes = []
+    def get_queryset(self):
+        queryset = Book.objects.all()
+        top_rated = self.request.query_params.get('top_rated')
+        # Check if the 'top_rated' parameter is provided
+        if top_rated == 'true':
+            queryset = queryset.order_by('-number_of_ratings')[:5]
 
-    def list(self, request):
-        # Note the use of `get_queryset()` instead of `self.queryset`
-        queryset = self.get_queryset()
-        serializer = BookSerializer(queryset, many=True)
-        return Response(serializer.data)
-
+        return queryset
+    
 class RecommendationAPIView(generics.ListCreateAPIView):
   
-   #recommended_books = get_recommendations_from_ml_model(book_id)
+    #recommended_books = get_recommendations_from_ml_model(book_id)
     queryset =  Book.objects.all()# Serialize the recommended books
     serializer_class = BookSerializer
     authentication_classes = [] 
@@ -47,15 +48,16 @@ class RecommendationAPIView(generics.ListCreateAPIView):
 
 class GenreBooksAPIView(generics.ListAPIView):
     serializer_class = BookSerializer
+   
     permission_classes = []
     def get_queryset(self):
         category = self.kwargs['category']
-        print("Before:",category)  # Get the genre from URL parameters
+        top_rated = self.request.query_params.get('top_rated')
         queryset = Book.objects.filter(category__category=category)
-        
+        if top_rated == 'true':
+            queryset = queryset.order_by('-number_of_ratings')[:5]
         return queryset
     
-
 class MostLikedBooks(generics.ListAPIView):
     serializer_class = BookSerializer
     permission_classes = []
@@ -66,8 +68,7 @@ class MostLikedBooks(generics.ListAPIView):
         user = User.objects.get(id=user_id) 
         # Retrieve the books liked by the user
         liked_books = Like.objects.filter(user=user).values_list('book', flat=True)
-
-        # Return the queryset of liked books
+      
         return Book.objects.filter(id__in=liked_books)
     
 
@@ -92,3 +93,22 @@ class MostRecentBooks(generics.ListAPIView):
     def get_queryset(self):
         queryset = Book.objects.order_by('-created_at')[:5]
         return queryset
+    
+class AllGenreBooks(generics.ListAPIView):
+    permission_classes =[]
+    def get_queryset(self):
+        
+        queryset = Category.objects.values_list('category', flat=True).distinct()
+        categories = list(queryset)
+
+        # Return the list of categories in the response
+        return queryset
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+
+        
+        return Response(queryset, status=status.HTTP_200_OK)
+    
+    
+    

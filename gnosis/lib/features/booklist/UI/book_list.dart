@@ -4,7 +4,7 @@ import 'package:gnosis/models/book_model.dart';
 
 class BookList extends StatelessWidget {
   final String title;
-  final List<BookModel> books;
+  final Future<List<BookModel>> books;
   const BookList({super.key, required this.title, required this.books});
 
   @override
@@ -14,12 +14,20 @@ class BookList extends StatelessWidget {
         title: Text(title),
         centerTitle: true,
       ),
-      body: ListView.builder(
-          itemBuilder: (context, index) => BookListItem(
-                book: books[index],
-                onTap: () {},
-              ),
-          itemCount: books.length),
+      body: FutureBuilder(
+        future: books,
+        builder:(context, snapshot) {
+          if(snapshot.connectionState == ConnectionState.done){
+            return ListView.builder(
+            itemBuilder: (context, index) => BookListItem(
+                  book: snapshot.data![index],
+                  onTap: () {},
+                ),
+            itemCount: snapshot.data?.length ?? 0);
+          }
+          return Center(child: CircularProgressIndicator());
+        },
+    )
     );
   }
 }

@@ -157,3 +157,6 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 SESSION_COOKIE_AGE = 300 #300 seconds (5 mins)
+
+USE_L10N = False
+DATE_INPUT_FORMATS = ['%d %b %Y']  # Changing the date format in DateField 
