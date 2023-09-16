@@ -6,6 +6,7 @@ import 'package:gnosis/features/Sigin/repository/sign_in_repo.dart';
 import 'package:gnosis/features/forgot_password/bloc/forgot_password_bloc.dart';
 import 'package:gnosis/features/home/bloc/home_bloc.dart';
 import 'package:gnosis/features/home_page/bloc/home_page_bloc.dart';
+import 'package:gnosis/features/home_page/repository/home_repo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 GetIt sl = GetIt.instance;
@@ -28,4 +29,7 @@ void setup() {
   sl.registerSingletonWithDependencies<SignInRepository>(
       () => SignInRepository(apiService: sl(), pref: sl()),
       dependsOn: [ApiService, SharedPreferences]);
+  sl.registerSingletonWithDependencies<HomeRepository>(
+      () => HomeRepository(apiService: sl()),
+      dependsOn: [ApiService]);
 }

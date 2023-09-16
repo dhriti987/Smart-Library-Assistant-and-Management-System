@@ -21,6 +21,7 @@ class HomeRepository {
       var response = await api.get(baseURL + recommendBooksURL);
       return BookModel.listFromJson(response.data);
     } on DioException catch (exception) {
+      print(exception.response);
       throw ApiException(exception: exception);
     }
   }

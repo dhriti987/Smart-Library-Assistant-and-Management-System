@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const Color primaryColor = Color.fromARGB(250, 205, 97, 129);
+const Color primaryColor = Color.fromARGB(255, 0, 80, 146);
 ThemeData lightTheme = ThemeData();
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
@@ -33,6 +33,7 @@ ThemeData darkTheme = ThemeData(
     ),
     labelMedium: TextStyle(color: Colors.white,fontSize: 14),
     titleMedium: TextStyle(color: Colors.black),
+    titleLarge: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),
     labelLarge: TextStyle(
       color: Colors.white,
       fontSize: 20,

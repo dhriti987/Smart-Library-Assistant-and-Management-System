@@ -41,8 +41,8 @@ class BookModel {
       location: data['location'],
       imgUrl: data['img_url'],
       boolFile: data['file'],
-      category: data['catagory'],
-      author: data['author']
+      category: (data['category'] as List).cast<String>(),
+      author: (data['author'] as List).cast<String>(),
     );
   }
 

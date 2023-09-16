@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gnosis/features/home/bloc/home_bloc.dart';
 import 'package:gnosis/features/home_page/UI/home_page.dart';
 import 'package:gnosis/features/library_page/UI/library_page.dart';
+import 'package:gnosis/features/menu/UI/menu.dart';
 import 'package:gnosis/features/notes_page/UI/notes_page.dart';
 import 'package:gnosis/service_locator.dart';
 
@@ -43,11 +44,19 @@ class _HomeState extends State<Home> {
           pageIndex = state.pageIndex;
         }
         return Scaffold(
+          drawer: MenuPage(),
           appBar: AppBar(
-            leading: IconButton(
-                padding: EdgeInsets.only(left: 20),
-                onPressed: () {},
-                icon: Icon(Icons.menu)),
+            // leading: IconButton(
+            //     padding: EdgeInsets.only(left: 20),
+            //     onPressed: () {
+            //       // context.go('/menu');
+            //       // Navigator.push(context,
+            //       //     MaterialPageRoute(builder: ((context) {
+            //       //   return MenuPage();
+            //       // })));
+            //       Scaffold.of(context).openDrawer();
+            //     },
+            //     icon: Icon(Icons.menu)),
             actions: [
               IconButton(
                   padding: EdgeInsets.only(right: 20),
@@ -58,9 +67,10 @@ class _HomeState extends State<Home> {
           body: pages[pageIndex],
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: pageIndex,
+            fixedColor: Color.fromARGB(255, 0, 80, 146),
             onTap: (index) {
-              homeBloc.add(
-                  BottomNavigationBarIconClickedEvent(pageIndex: index));
+              homeBloc
+                  .add(BottomNavigationBarIconClickedEvent(pageIndex: index));
             },
             items: [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),

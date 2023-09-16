@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gnosis/features/forgot_password/UI/forgot_password.dart';
 import 'package:gnosis/features/Sigin/bloc/signin_bloc.dart';
 import 'package:gnosis/service_locator.dart';
 import 'package:go_router/go_router.dart';
 
-class SignIn extends StatelessWidget {
+class SignIn extends StatelessWidget with ValidationMixin {
   SignIn({super.key});
+
   final emailController = TextEditingController();
+
   final passwordController = TextEditingController();
+
+  final formGlobalKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +27,9 @@ class SignIn extends StatelessWidget {
           context.go('/');
         }
         if (state is SigninToForgotPasswordPageActionState) {
-          Navigator.push(context,
-              MaterialPageRoute(builder: ((context) => ForgotPassword())));
+          // Navigator.push(context,
+          //     MaterialPageRoute(builder: ((context) => ForgotPassword())));
+          context.go('/forgot_password');
         }
         if (state is SigninErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -45,112 +49,160 @@ class SignIn extends StatelessWidget {
             height: double.maxFinite,
             width: double.maxFinite,
             decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/video/library_bg_gif.gif'),
-                fit: BoxFit.cover,
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromARGB(255, 0, 40, 73),
+                  Color.fromARGB(255, 0, 20, 39),
+                ],
               ),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: Text(
-                    'Explore the World of \nBooks',
-                    style: textTheme.headlineLarge,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 40),
-                  child: Text(
-                    'Email',
-                    style: textTheme.labelMedium,
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 20, right: 20),
-                  child: TextField(
-                    controller: emailController,
-                    decoration: InputDecoration()
-                        .applyDefaults(Theme.of(context).inputDecorationTheme)
-                        .copyWith(hintText: 'Enter email address'),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 40),
-                  child: Text(
-                    'Password',
-                    style: textTheme.labelMedium,
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 20, right: 20),
-                  child: TextField(
-                    controller: passwordController,
-                    obscureText: true,
-                    decoration: InputDecoration()
-                        .applyDefaults(Theme.of(context).inputDecorationTheme)
-                        .copyWith(hintText: 'Enter password'),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  alignment: Alignment.centerRight,
-                  margin: EdgeInsets.only(right: 30),
-                  child: TextButton(
-                    onPressed: () {
-                      signinBloc.add(ForgotPasswordClickedEvent());
-                    },
+            child: Form(
+              key: formGlobalKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
                     child: Text(
-                      'Forget your password?',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
+                      'Explore the World of \nBooks',
+                      style: textTheme.headlineLarge,
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 28,
-                ),
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // context.go('/');
-                      signinBloc.add(SignInButtonClickedEvent(
-                        email: emailController.text,
-                        password: passwordController.text,
-                      ));
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(10),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 40),
+                    child: Text(
+                      'Email',
+                      style: textTheme.labelMedium,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 20, right: 20),
+                    child: TextFormField(
+                      controller: emailController,
+                      validator: (email) {
+                        if (isEmailValid(email!))
+                          return null;
+                        else
+                          return 'Email address is not valid';
+                      },
+                      decoration: InputDecoration()
+                          .applyDefaults(Theme.of(context).inputDecorationTheme)
+                          .copyWith(
+                            hintText: 'Enter email address',
+                            // errorText: emailController.text.isEmpty || RegExp(emailController.text) == RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                            //     ? "Enter a valid email address"
+                            //     : null,
+                          ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 40),
+                    child: Text(
+                      'Password',
+                      style: textTheme.labelMedium,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 20, right: 20),
+                    child: TextFormField(
+                      controller: passwordController,
+                      obscureText: true,
+                      validator: (password) {
+                        if (isPasswordValid(password!))
+                          return null;
+                        else
+                          return 'Password length is short.';
+                      },
+                      decoration: InputDecoration()
+                          .applyDefaults(Theme.of(context).inputDecorationTheme)
+                          .copyWith(
+                            hintText: 'Enter password',
+                            // errorText: passwordController.text.length < 6 ||
+                            //         passwordController.text.isEmpty
+                            //     ? "Password must be at least 6 charaters"
+                            //     : null,
+                          ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    margin: EdgeInsets.only(right: 30),
+                    child: TextButton(
+                      onPressed: () {
+                        signinBloc.add(ForgotPasswordClickedEvent());
+                      },
                       child: Text(
-                        'Login',
-                        style: textTheme.labelLarge,
+                        'Forget your password?',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),
-                )
-              ],
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // context.go('/');
+                        if (formGlobalKey.currentState!.validate()) {
+                          formGlobalKey.currentState!.save();
+                          signinBloc.add(SignInButtonClickedEvent(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          ));
+                        }
+                        // signinBloc.add(SignInButtonClickedEvent(
+                        //   email: emailController.text,
+                        //   password: passwordController.text,
+                        // ));
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          'Login',
+                          style: textTheme.labelLarge,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         );
       },
     );
+  }
+}
+
+mixin ValidationMixin {
+  bool isPasswordValid(String inputpassword) => inputpassword.length == 6;
+
+  bool isEmailValid(String inputemail) {
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))';
+    RegExp regexp = RegExp(pattern.toString());
+    return regexp.hasMatch(inputemail);
   }
 }

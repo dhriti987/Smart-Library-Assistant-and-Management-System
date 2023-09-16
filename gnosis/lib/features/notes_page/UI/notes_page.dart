@@ -10,9 +10,13 @@ class NotesPage extends StatelessWidget {
         height: double.maxFinite,
         width: double.maxFinite,
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/video/library_bg_gif.gif'),
-            fit: BoxFit.cover,
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(255, 0, 40, 73),
+              Color.fromARGB(255, 0, 20, 39),
+            ],
           ),
         ),
         child: Text('Welcome to Notes Page'),
