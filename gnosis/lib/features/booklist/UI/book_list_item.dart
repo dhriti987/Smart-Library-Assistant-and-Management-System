@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:gnosis/core/services/api_service.dart';
-import 'package:gnosis/features/home/repository/home_repo.dart';
+import 'package:gnosis/features/home_page/repository/home_repo.dart';
 import 'package:gnosis/models/book_model.dart';
 import 'package:gnosis/service_locator.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const Color primaryColor = Color.fromARGB(250, 205, 97, 129);
+const Color primaryColor = Color.fromARGB(255, 0, 80, 146);
 ThemeData lightTheme = ThemeData();
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
@@ -20,13 +20,29 @@ ThemeData darkTheme = ThemeData(
     fillColor: Colors.white,
     hintStyle: const TextStyle(color: Colors.black),
   ),
-  textTheme:const  TextTheme(
+  textTheme: const TextTheme(
     headlineLarge: TextStyle(
       fontSize: 28,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     ),
-    labelMedium: TextStyle(color: Colors.white),
+    headlineMedium: TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
+    labelMedium: TextStyle(color: Colors.white,fontSize: 14),
     titleMedium: TextStyle(color: Colors.black),
+    titleLarge: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),
+    labelLarge: TextStyle(
+      color: Colors.white,
+      fontSize: 20,
+    ),
   ),
+  appBarTheme: AppBarTheme(
+    backgroundColor: Colors.white10,
+  ),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    backgroundColor: Colors.white10,
+  )
 );

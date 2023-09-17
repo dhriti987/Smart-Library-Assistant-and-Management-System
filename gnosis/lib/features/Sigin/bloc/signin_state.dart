@@ -11,7 +11,7 @@ class SigninSuccessState extends SigninState{}
 
 class ForgotPasswordState extends SigninState{}
 
-class SigninErrorState extends SigninState{}
+class SigninErrorState extends SigninActionState{}
 
 class SigninToHomePageActionState extends SigninActionState{}
 
