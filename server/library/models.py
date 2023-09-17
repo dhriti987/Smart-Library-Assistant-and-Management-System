@@ -10,9 +10,14 @@ User = get_user_model()
 #
 class Author(models.Model):
     name = models.CharField(max_length=100)  
+    bio = models.TextField(max_length=1000,blank=True)
+    date_of_birth = models.DateField(blank=True)
+    wiki_link = models.URLField(blank=True)
+    img_url = models.URLField(blank=True)
+    
     def __str__(self) -> str:
         return self.name
-
+    
 class Category(models.Model):
     category = models.CharField(max_length=200)
 

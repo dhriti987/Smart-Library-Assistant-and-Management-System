@@ -3,9 +3,10 @@ from .models import *
 
 
 class CategorySerializer(serializers.ModelSerializer):
+    category = serializers.CharField()
     class Meta:
         model = Category
-        fields = ['category']
+        fields = "__all__"
 
 
 
@@ -17,10 +18,11 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 
 class BookSerializer(serializers.ModelSerializer):
-    
     category = serializers.SerializerMethodField('get_category')
     def get_category(self,obj):
-        return [category.category for category in obj.category.all()]
+       
+        data = [cat.category for cat in obj.category.all()]
+        return data
     author = serializers.SerializerMethodField('get_author')
     def get_author(self,obj):
         return [author.name for author in obj.author.all()]

@@ -6,8 +6,9 @@ from datetime import timedelta
 from django.utils import timezone
 from django.contrib.auth import authenticate
 
-# Create your views here. "rajvi12345#"
+# Create your views here. "rajvi12345# rajvi12345#"
 from django.contrib.auth.password_validation import validate_password
+from rest_framework import status
 
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
@@ -47,8 +48,11 @@ class HandleSendigMail(threading.Thread):
 class EmailValidation(APIView):
     permission_classes  = []
     def post(self,request):
+        email = request.data.get('email')
         serializer = EmailValidationSerializer(data=request.data)
+        print("Data;",serializer)
         if serializer.is_valid():
+            print("iNSIDE if")
             email = serializer.validated_data['email']
             user = User.objects.filter(email=email)
             if not user.exists():
@@ -68,10 +72,17 @@ class EmailValidation(APIView):
                 HandleSendigMail(message,subject,email_from,[email]).start()
                 return Response({'status':200,'message':f"OTP Sent to the email {email}"})
         else:
-            return Response({
-                'status':400,
-                'message':"Invalid Email"
-            })
+            print("Inside ELse")
+            if 'email' in serializer.errors:
+                error_message = serializer.errors['email'][0]  # Get the first error message
+                return Response({'status': status.HTTP_400_BAD_REQUEST,
+                                 'message': error_message},
+                                status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response({'status': status.HTTP_400_BAD_REQUEST,
+                                 'message': "Invalid Email"},
+                                status=status.HTTP_400_BAD_REQUEST)
+
         
 
 class NewPasswordValidation(APIView):
