@@ -1,4 +1,10 @@
 part of 'book_list_bloc.dart';
 
 @immutable
-sealed class BookListEvent {}
+abstract class BookListEvent {}
+
+class BookListElementClickedEvent extends BookListEvent {
+  final BookModel book;
+
+  BookListElementClickedEvent({required this.book});
+}

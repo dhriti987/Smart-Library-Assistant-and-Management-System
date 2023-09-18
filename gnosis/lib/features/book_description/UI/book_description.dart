@@ -35,6 +35,7 @@ class _BookDescriptionPageState extends State<BookDescriptionPage> {
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
+      appBar: AppBar(),
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -143,8 +144,8 @@ class _BookDescriptionPageState extends State<BookDescriptionPage> {
                   ),
                   Positioned(
                     top: 290,
-                    left: 0,
-                    right: 0,
+                    left: 20,
+                    right: 20,
                     child: Text(
                       book.title,
                       textAlign: TextAlign.center,
@@ -204,7 +205,7 @@ class _BookDescriptionPageState extends State<BookDescriptionPage> {
                           return Container(
                             padding: EdgeInsets.symmetric(
                                 vertical: 5, horizontal: 10),
-                            margin: EdgeInsets.only(left: 10,bottom: 10),
+                            margin: EdgeInsets.only(left: 10, bottom: 10),
                             decoration: BoxDecoration(
                               color: Colors.white.withOpacity(0.4),
                               borderRadius: BorderRadius.circular(10),
@@ -225,17 +226,28 @@ class _BookDescriptionPageState extends State<BookDescriptionPage> {
                         height: 10,
                       ),
                       Container(
-                        padding: EdgeInsets.only(left: 20,right: 20),
+                        padding: EdgeInsets.only(left: 20, right: 20),
                         child: Text(book.description),
                       )
                     ],
-                  )
+                  ),
                 ],
               ),
-            )
+            ),
+            book.bookFile != null ? 
+            Container(
+              height: 70,
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text('Read Book'),
+              ),
+            ) : SizedBox()
           ],
         ),
       ),
+      extendBodyBehindAppBar: true,
     );
   }
 }

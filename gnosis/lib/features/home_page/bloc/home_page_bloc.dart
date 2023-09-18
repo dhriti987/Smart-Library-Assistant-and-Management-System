@@ -17,6 +17,7 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     });
     on<HomePageInitailEvent>(homePageInitialEvent);
     on<BookImageClickedEvent>(bookImageClickedEvent);
+    on<BookTabButtonClickedEvent>(bookTabButtonClickedEvent);
   }
 
   FutureOr<void> homePageInitialEvent(
@@ -35,5 +36,18 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   FutureOr<void> bookImageClickedEvent(
       BookImageClickedEvent event, Emitter<HomePageState> emit) {
     emit(HomePageToBookDescriptionPageActionState(book: event.book));
+  }
+
+  FutureOr<void> bookTabButtonClickedEvent(
+      BookTabButtonClickedEvent event, Emitter<HomePageState> emit) {
+    switch (event.tabName) {
+      case "Top Rated":
+        var books = homeRepository.getTopRatedBooks();
+        emit(HomePageToBookListPageActionState(
+            title: 'Top Rated', books: books));
+
+      case 'Categories':
+        emit(HomePageToCategoryListPageActionState());
+    }
   }
 }
