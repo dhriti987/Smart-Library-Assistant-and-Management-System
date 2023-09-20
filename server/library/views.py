@@ -11,6 +11,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 
 # rdz123
 
@@ -81,7 +82,6 @@ class BooksReadByUser(generics.ListAPIView):
         user_id = self.kwargs['user_id']  # Assuming 'user_id' is passed as a URL parameter
         User = get_user_model() 
         user = User.objects.get(id=user_id) 
-       
         books_read = BookRead.objects.filter(user=user).values_list('books', flat=True)
 
         
@@ -112,3 +112,37 @@ class AllGenreBooks(generics.ListAPIView):
     
     
     
+class SearchBooks(generics.ListAPIView):
+    # Fuzzy in Full Text , where if a spelling is wrong , it will still display
+    permission_classes = []
+    serializer_class  = BookSerializer
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        return Book.objects.filter(title__search=query)
+
+
+    """search_vector = SearchVector("title")
+        search_query = SearchQuery(query)
+        return (
+                Book.objects.annotate(
+                    search=search_vector, rank=SearchRank(search_vector, search_query)
+                )
+                .filter(search=search_query)
+                .order_by("-rank")
+            )"""
+    
+class AllAuthorList(generics.ListAPIView):
+    permission_classes = []
+    serializer_class = AuthorSerializer
+    def get_queryset(self):
+        queryset = Author.objects.all()
+        return queryset
+    
+class AuthorBook(generics.ListAPIView):
+    permission_classes = []
+    serializer_class = BookSerializer
+    def get_queryset(self):
+        author_name = self.kwargs['author'] #First get the author from URL
+        author = Author.objects.get(name = author_name) # Get the record of the author from author_name
+        queryset = author.books.all() # By using related_name(books), get the record of all books of the author 
+        return queryset
