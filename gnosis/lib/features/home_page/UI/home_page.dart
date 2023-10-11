@@ -16,14 +16,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final topList = ['Categories', 'Top Rated', 'New Launched'];
+  final topList = ['Categories', 'Top Rated', 'Author'];
 
   late HomePageBloc homePageBloc;
   late HomeRepository homeRepository;
   List<BookModel> recommendedBooks = [];
   List<BookModel> topRatedBooks = [];
-  final image =
-      'https://upload.wikimedia.org/wikipedia/en/1/1d/Twilightbook.jpg';
 
   @override
   void initState() {
@@ -52,6 +50,9 @@ class _HomePageState extends State<HomePage> {
         }
         if (state is HomePageToCategoryListPageActionState) {
           context.push('/category_list');
+        }
+        if (state is HomePageToAuthorInfoPageActionState) {
+          context.push('/author_info');
         }
       },
       builder: (context, state) {

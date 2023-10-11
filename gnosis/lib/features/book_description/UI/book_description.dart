@@ -170,12 +170,18 @@ class _BookDescriptionPageState extends State<BookDescriptionPage> {
                               style: textTheme.titleLarge,
                             ),
                             Text(book.author.join('\n')),
+                            // TextButton(
+                            //   onPressed: () {},
+                            //   child: Text(
+                            //     'More Info...',
+                            //     style: TextStyle(fontSize: 16),
+                            //   ),
+                            // )
                           ],
                         ),
                         VerticalDivider(
                           color: Colors.white24,
                           thickness: 1,
-                          width: 2,
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -234,16 +240,17 @@ class _BookDescriptionPageState extends State<BookDescriptionPage> {
                 ],
               ),
             ),
-            book.bookFile != null ? 
-            Container(
-              height: 70,
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Text('Read Book'),
-              ),
-            ) : SizedBox()
+            book.bookFile != null
+                ? Container(
+                    height: 70,
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: Text('Read Book'),
+                    ),
+                  )
+                : SizedBox()
           ],
         ),
       ),

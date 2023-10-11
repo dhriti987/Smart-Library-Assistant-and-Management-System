@@ -48,6 +48,9 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
 
       case 'Categories':
         emit(HomePageToCategoryListPageActionState());
+
+      case 'Author':
+        emit(HomePageToAuthorInfoPageActionState());
     }
   }
 }

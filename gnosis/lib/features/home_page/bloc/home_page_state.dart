@@ -31,3 +31,5 @@ class HomePageToBookListPageActionState extends HomePageActionState {
 }
 
 class HomePageToCategoryListPageActionState extends HomePageActionState{}
+
+class HomePageToAuthorInfoPageActionState extends HomePageActionState{}

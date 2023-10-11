@@ -17,6 +17,7 @@ class CategoryListBloc extends Bloc<CategoryListEvent, CategoryListState> {
       // TODO: implement event handler
     });
     on<CategoryListFetchEvent>(categoryListFetchEvent);
+    on<CategoryClickedEvent>(categoryClickedEvent);
   }
 
   FutureOr<void> categoryListFetchEvent(
@@ -24,5 +25,12 @@ class CategoryListBloc extends Bloc<CategoryListEvent, CategoryListState> {
     emit(CategoryListLoadingState());
     List<String> categories = await categoryListRepository.getCategories();
     emit(CategoryListSuccessState(categoryList: categories));
+  }
+
+  FutureOr<void> categoryClickedEvent(
+      CategoryClickedEvent event, Emitter<CategoryListState> emit) {
+    var books =
+        categoryListRepository.getBooksByCategory(event.category);
+    emit(DisplayCategoryBooksState(books: books, title: event.category));
   }
 }

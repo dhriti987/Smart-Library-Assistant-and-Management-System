@@ -1,5 +1,6 @@
 // import 'package:flutter/material.dart';
 import 'package:gnosis/features/Sigin/UI/Sign_in.dart';
+import 'package:gnosis/features/author_info/UI/author_info.dart';
 import 'package:gnosis/features/book_description/UI/book_description.dart';
 import 'package:gnosis/features/booklist/UI/book_list.dart';
 import 'package:gnosis/features/categorylist/UI/category_list.dart';
@@ -74,6 +75,13 @@ class AppRouter {
           name: 'CategoryList',
           builder: (context, state) {
             return CategoryList();
+          },
+        ),
+        GoRoute(
+          path: '/author_info',
+          name: 'AuthorInfo',
+          builder: (context, state) {
+            return AuthorInfo();
           },
         )
       ],

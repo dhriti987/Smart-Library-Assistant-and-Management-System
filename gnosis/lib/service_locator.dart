@@ -4,6 +4,7 @@ import 'package:gnosis/core/services/api_service.dart';
 import 'package:gnosis/features/Sigin/bloc/signin_bloc.dart';
 import 'package:gnosis/features/Sigin/repository/sign_in_repo.dart';
 import 'package:gnosis/features/booklist/bloc/book_list_bloc.dart';
+import 'package:gnosis/features/categorylist/bloc/category_list_bloc.dart';
 import 'package:gnosis/features/categorylist/repository/category_list_repo.dart';
 import 'package:gnosis/features/forgot_password/bloc/forgot_password_bloc.dart';
 import 'package:gnosis/features/home/bloc/home_bloc.dart';
@@ -27,6 +28,7 @@ void setup() {
   sl.registerFactory(() => HomeBloc());
   sl.registerFactory(() => ForgotPasswordBloc());
   sl.registerFactory(() => BookListBloc());
+  sl.registerFactory(() => CategoryListBloc());
 
   //repositories
   sl.registerSingletonWithDependencies<SignInRepository>(
@@ -37,6 +39,5 @@ void setup() {
       dependsOn: [ApiService]);
   sl.registerSingletonWithDependencies<CategoryListRepository>(
     () => CategoryListRepository(apiService: sl()),
-    dependsOn: [ApiService],
-  );
+    dependsOn: [ApiService]);
 }
