@@ -9,7 +9,7 @@ class BookModel {
   final int copies;
   final String location;
   final String imgUrl;
-  final String? boolFile;
+  final String? bookFile;
   final List<String> category;
   final List<String> author;
 
@@ -24,7 +24,7 @@ class BookModel {
       required this.copies,
       required this.location,
       required this.imgUrl,
-      required this.boolFile,
+      required this.bookFile,
       required this.category,
       required this.author});
 
@@ -40,7 +40,7 @@ class BookModel {
       copies: data['copies'],
       location: data['location'],
       imgUrl: data['img_url'],
-      boolFile: data['file'],
+      bookFile: data['file'],
       category: (data['category'] as List).cast<String>(),
       author: (data['author'] as List).cast<String>(),
     );

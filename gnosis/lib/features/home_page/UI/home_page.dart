@@ -16,25 +16,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final topList = ['Genres', 'Top Reted', 'New Launched'];
-  // final bookList = {
-  //   "Twilight":
-  //       "https://upload.wikimedia.org/wikipedia/en/1/1d/Twilightbook.jpg",
-  //   "New Moon":
-  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3rth1CWmpkN0g-lVufd4QY_hRS6xdiHyFzw&usqp=CAU",
-  //   "Eclipse":
-  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe3TSolpYt9IkUJ_4khLVzgQTAjqxpLBCjww&usqp=CAU",
-  //   "Breacking Dawn":
-  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNyIfU76bSSz1VFrXE26ZsC5lUvenduUGC6A&usqp=CAU",
-  //   "Midnight Sun":
-  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy8XZf4jxPUTA3wlFKIpG2DsQK1EOb6ykofg&usqp=CAU",
-  // };
+  final topList = ['Categories', 'Top Rated', 'Author'];
+
   late HomePageBloc homePageBloc;
   late HomeRepository homeRepository;
   List<BookModel> recommendedBooks = [];
   List<BookModel> topRatedBooks = [];
-  final image =
-      'https://upload.wikimedia.org/wikipedia/en/1/1d/Twilightbook.jpg';
 
   @override
   void initState() {
@@ -55,7 +42,17 @@ class _HomePageState extends State<HomePage> {
       listener: (context, state) {
         // TODO: implement listener
         if (state is HomePageToBookDescriptionPageActionState) {
-          context.push('/book_description',extra: state.book);
+          context.push('/book_description', extra: state.book);
+        }
+        if (state is HomePageToBookListPageActionState) {
+          context.pushNamed('BookList',
+              extra: state.books, pathParameters: {'title': state.title});
+        }
+        if (state is HomePageToCategoryListPageActionState) {
+          context.push('/category_list');
+        }
+        if (state is HomePageToAuthorInfoPageActionState) {
+          context.push('/author_info');
         }
       },
       builder: (context, state) {
@@ -97,7 +94,11 @@ class _HomePageState extends State<HomePage> {
                   ),
                   itemBuilder: (BuildContext context, int index) {
                     return ElevatedButton(
-                        onPressed: () {}, child: Text(topList[index]));
+                        onPressed: () {
+                          homePageBloc.add(BookTabButtonClickedEvent(
+                              tabName: topList[index]));
+                        },
+                        child: Text(topList[index]));
                   },
                 ),
               ),
@@ -158,7 +159,8 @@ class _HomePageState extends State<HomePage> {
                                     ConnectionState.done) {
                                   return InkWell(
                                     onTap: () {
-                                      homePageBloc.add(BookImageClickedEvent(book: recommendedBooks[index]));
+                                      homePageBloc.add(BookImageClickedEvent(
+                                          book: recommendedBooks[index]));
                                     },
                                     child: Image.memory(
                                       snapshot.data ?? Uint8List(0),
@@ -233,7 +235,8 @@ class _HomePageState extends State<HomePage> {
                                     ConnectionState.done) {
                                   return InkWell(
                                     onTap: () {
-                                      homePageBloc.add(BookImageClickedEvent(book: topRatedBooks[index]));
+                                      homePageBloc.add(BookImageClickedEvent(
+                                          book: topRatedBooks[index]));
                                     },
                                     child: Image.memory(
                                       snapshot.data ?? Uint8List(0),

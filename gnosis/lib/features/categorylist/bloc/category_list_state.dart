@@ -4,13 +4,13 @@ part of 'category_list_bloc.dart';
 sealed class CategoryListState {}
 
 @immutable
-sealed class CategoryListActionState extends CategoryListState{}
+sealed class CategoryListActionState extends CategoryListState {}
 
 final class CategoryListInitial extends CategoryListState {}
 
 final class CategoryListLoadingState extends CategoryListState {}
 
-class CategoryListSuccessState extends CategoryListState{
+class CategoryListSuccessState extends CategoryListState {
   final List<String> categoryList;
 
   CategoryListSuccessState({required this.categoryList});
@@ -19,7 +19,8 @@ class CategoryListSuccessState extends CategoryListState{
 class CategoryListErrorState extends CategoryListState {}
 
 class DisplayCategoryBooksState extends CategoryListActionState {
+  final String title;
   final Future<List<BookModel>> books;
 
-  DisplayCategoryBooksState({required this.books});
+  DisplayCategoryBooksState({required this.books,required this.title});
 }

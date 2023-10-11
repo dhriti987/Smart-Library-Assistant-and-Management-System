@@ -5,7 +5,11 @@ abstract class HomePageEvent {}
 
 class HomePageInitailEvent extends HomePageEvent {}
 
-class BookVarietyButtonClickedEvent extends HomePageEvent {}
+class BookTabButtonClickedEvent extends HomePageEvent {
+  final String tabName;
+
+  BookTabButtonClickedEvent({required this.tabName});
+}
 
 class BookHeadingTextClickedEvent extends HomePageEvent {}
 

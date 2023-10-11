@@ -1,6 +1,9 @@
 // import 'package:flutter/material.dart';
 import 'package:gnosis/features/Sigin/UI/Sign_in.dart';
+import 'package:gnosis/features/author_info/UI/author_info.dart';
 import 'package:gnosis/features/book_description/UI/book_description.dart';
+import 'package:gnosis/features/booklist/UI/book_list.dart';
+import 'package:gnosis/features/categorylist/UI/category_list.dart';
 import 'package:gnosis/features/forgot_password/UI/forgot_password.dart';
 import 'package:gnosis/features/home/UI/home.dart';
 import 'package:gnosis/features/menu/UI/menu.dart';
@@ -53,7 +56,32 @@ class AppRouter {
           name: 'BookDescriptionPage',
           builder: (context, state) {
             BookModel book = state.extra as BookModel;
-            return BookDescriptionPage(book: book,);
+            return BookDescriptionPage(
+              book: book,
+            );
+          },
+        ),
+        GoRoute(
+          path: '/book_list/:title',
+          name: 'BookList',
+          builder: (context, state) {
+            var books = state.extra as Future<List<BookModel>>;
+            var title = state.pathParameters["title"] ?? "";
+            return BookList(title: title, books: books);
+          },
+        ),
+        GoRoute(
+          path: '/category_list',
+          name: 'CategoryList',
+          builder: (context, state) {
+            return CategoryList();
+          },
+        ),
+        GoRoute(
+          path: '/author_info',
+          name: 'AuthorInfo',
+          builder: (context, state) {
+            return AuthorInfo();
           },
         )
       ],

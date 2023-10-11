@@ -22,3 +22,14 @@ class HomePageToBookDescriptionPageActionState extends HomePageActionState {
 
   HomePageToBookDescriptionPageActionState({required this.book});
 }
+
+class HomePageToBookListPageActionState extends HomePageActionState {
+  final String title;
+  final Future<List<BookModel>> books;
+
+  HomePageToBookListPageActionState({required this.title, required this.books});
+}
+
+class HomePageToCategoryListPageActionState extends HomePageActionState{}
+
+class HomePageToAuthorInfoPageActionState extends HomePageActionState{}
