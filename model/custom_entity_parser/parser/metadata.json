@@ -1,0 +1,16 @@
+{
+  "parsers_metadata": [
+    {
+      "entity_identifier": "author",
+      "entity_parser": "parser_1"
+    },
+    {
+      "entity_identifier": "book",
+      "entity_parser": "parser_2"
+    },
+    {
+      "entity_identifier": "genre",
+      "entity_parser": "parser_3"
+    }
+  ]
+}

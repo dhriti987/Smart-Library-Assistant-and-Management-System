@@ -1,9 +1,5 @@
-import pandas as pd
+from snips_nlu import SnipsNLUEngine
 
-# Read the data from Excel file
-excel_data = pd.read_excel('books-database.xlsx')
+parser = SnipsNLUEngine.from_path('../model')
 
-# Convert the data to a list of dictionaries
-books_data = excel_data.to_dict(orient='records')
-
-print(books_data)
+print(parser.parse('where can i find briget jones diary'))
