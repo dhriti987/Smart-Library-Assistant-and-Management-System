@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+
 from server.settings import AUTH_USER_MODEL
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -21,7 +22,7 @@ def getBook(request):
     books = Book.objects.all()
     serializer = BookSerializer(books,many=True)
     return Response(serializer.data)
-
+#paginatuion 20 books per page
 
 class TopRatedBookAPIView(generics.ListCreateAPIView):
     serializer_class = BookSerializer
@@ -36,16 +37,12 @@ class TopRatedBookAPIView(generics.ListCreateAPIView):
         return queryset
     
 class RecommendationAPIView(generics.ListCreateAPIView):
-  
-    #recommended_books = get_recommendations_from_ml_model(book_id)
-    queryset =  Book.objects.all()# Serialize the recommended books
     serializer_class = BookSerializer
-    authentication_classes = [] 
-    permission_classes = []  
-    def list(self, request):
-        queryset = self.get_queryset()
-        serializer = BookSerializer(queryset, many=True)
-        return Response(serializer.data)
+    permission_classes = []
+    def get_queryset(self):
+        queryset = Book.objects.order_by('?')
+        return queryset
+    
 
 class GenreBooksAPIView(generics.ListAPIView):
     serializer_class = BookSerializer
@@ -56,10 +53,10 @@ class GenreBooksAPIView(generics.ListAPIView):
         top_rated = self.request.query_params.get('top_rated')
         queryset = Book.objects.filter(category__category=category)
         if top_rated == 'true':
-            queryset = queryset.order_by('-number_of_ratings')[:5]
+            queryset = queryset.order_by('-number_of_ratings')[:10]
         return queryset
     
-class MostLikedBooks(generics.ListAPIView):
+class MostLikedBooks(generics.ListAPIView): #The books liked by user request.usser
     serializer_class = BookSerializer
     permission_classes = []
     
@@ -91,7 +88,7 @@ class MostRecentBooks(generics.ListAPIView):
     permission_classes = []
     serializer_class = BookSerializer
     def get_queryset(self):
-        queryset = Book.objects.order_by('-created_at')[:5]
+        queryset = Book.objects.order_by('-created_at')[:10]
         return queryset
     
 class AllGenreBooks(generics.ListAPIView):
