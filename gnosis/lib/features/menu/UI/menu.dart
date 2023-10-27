@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:gnosis/features/Sigin/repository/sign_in_repo.dart';
+import 'package:gnosis/models/user_model.dart';
+import 'package:gnosis/service_locator.dart';
 
 class MenuPage extends StatelessWidget {
-  const MenuPage({super.key});
+  final UserModel userModel = sl.get<SignInRepository>().getUserData();
+  MenuPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +19,15 @@ class MenuPage extends StatelessWidget {
             child: UserAccountsDrawerHeader(
               decoration: BoxDecoration(color: Colors.grey),
               accountName: Text(
-                'Jerry',
+                userModel.name,
                 style: TextStyle(fontSize: 18),
               ),
-              accountEmail: Text('jerry987@gmail.com'),
+              accountEmail: Text(userModel.email),
               currentAccountPictureSize: Size.square(50),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Color.fromARGB(250, 205, 97, 129),
                 child: Text(
-                  'J',
+                  userModel.name[0],
                   style: TextStyle(color: Colors.white, fontSize: 30),
                 ),
               ),

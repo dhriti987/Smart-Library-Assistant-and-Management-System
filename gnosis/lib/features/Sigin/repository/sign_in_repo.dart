@@ -19,7 +19,8 @@ class SignInRepository {
       print(response.data);
       await pref.setString("token", response.data["token"]);
       await pref.setString("email", response.data["email"]);
-      await pref.setString("name", response.data['username'] ?? "None");
+      await pref.setString("id", response.data["user_id"].toString());
+      await pref.setString("name", response.data['username'] ?? "Unkown");
     } on DioException catch (exception) {
       print(exception.response);
       throw ApiException(exception: exception);
@@ -29,9 +30,10 @@ class SignInRepository {
   UserModel getUserData() {
     final email = pref.getString("email");
     final name = pref.getString("name");
-    if (email == null || name == null) {
+    final id = pref.getString("id");
+    if (email == null || name == null || id == null) {
       throw Exception(["User details Not Found", "User Not Logined"]);
     }
-    return UserModel(name: name, email: email);
+    return UserModel(id: id, name: name, email: email);
   }
 }

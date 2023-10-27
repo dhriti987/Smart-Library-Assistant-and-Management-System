@@ -9,4 +9,8 @@ final class BookDescriptionInitial extends BookDescriptionState {}
 
 class BookDescriptionSuccessState extends BookDescriptionState{}
 
-class BookDescriptionPageToEPubFileActionState extends BookDescriptionActionState{}
+class NavigateToBookReadPage extends BookDescriptionActionState {
+  final BookModel book;
+
+  NavigateToBookReadPage({required this.book});
+}

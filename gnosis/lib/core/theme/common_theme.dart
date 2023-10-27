@@ -38,6 +38,7 @@ ThemeData darkTheme = ThemeData(
       color: Colors.white,
       fontSize: 20,
     ),
+    labelSmall: TextStyle(color: Colors.white,fontSize: 10),
   ),
   appBarTheme: AppBarTheme(
     backgroundColor: Colors.white10,

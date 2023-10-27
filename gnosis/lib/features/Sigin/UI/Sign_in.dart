@@ -89,10 +89,11 @@ class SignIn extends StatelessWidget with ValidationMixin {
                     child: TextFormField(
                       controller: emailController,
                       validator: (email) {
-                        if (isEmailValid(email!))
+                        if (isEmailValid(email!)) {
                           return null;
-                        else
+                        } else {
                           return 'Email address is not valid';
+                        }
                       },
                       decoration: InputDecoration()
                           .applyDefaults(Theme.of(context).inputDecorationTheme)
@@ -123,10 +124,11 @@ class SignIn extends StatelessWidget with ValidationMixin {
                       controller: passwordController,
                       obscureText: true,
                       validator: (password) {
-                        if (isPasswordValid(password!))
+                        if (isPasswordValid(password!)) {
                           return null;
-                        else
+                        } else {
                           return 'Password length is short.';
+                        }
                       },
                       decoration: InputDecoration()
                           .applyDefaults(Theme.of(context).inputDecorationTheme)
@@ -197,7 +199,7 @@ class SignIn extends StatelessWidget with ValidationMixin {
 }
 
 mixin ValidationMixin {
-  bool isPasswordValid(String inputpassword) => inputpassword.length == 6;
+  bool isPasswordValid(String inputpassword) => inputpassword.length >= 6;
 
   bool isEmailValid(String inputemail) {
     Pattern pattern =
