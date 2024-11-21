@@ -69,7 +69,7 @@ This project was developed as part of a *College Minor Project* to enhance libra
 ---
 
 ## 📷 Screenshots
-Add some screenshots or GIFs of your app here to demonstrate its features.
+TBD
 
 ---
 
