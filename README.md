@@ -31,10 +31,7 @@ This project was developed as part of a *College Minor Project* to enhance libra
 ## 🛠️ Installation & Setup
 
 ### Backend (Django)
-1. Clone the repository:
-   bash
-   git clone https://github.com/yourusername/gnosis-library-assistant.git
-   cd gnosis-library-assistant/backend
+1. Clone this repository
    
 2. Create and activate a virtual environment:
    bash
