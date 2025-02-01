@@ -63,7 +63,7 @@ class MostLikedBooks(generics.ListAPIView): #The books liked by user request.uss
     def get_queryset(self):
         user_id = self.kwargs['user_id']  # Assuming 'user_id' is passed as a URL parameter
         User = get_user_model() 
-        user = User.objects.get(id=user_id) 
+        user = User.objects.get(id=user_id)
         # Retrieve the books liked by the user
         liked_books = Like.objects.filter(user=user).values_list('book', flat=True)
       

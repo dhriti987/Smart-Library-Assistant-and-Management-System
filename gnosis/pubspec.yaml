@@ -45,6 +45,7 @@ dependencies:
   syncfusion_flutter_pdfviewer: ^23.1.40
   flutter_html: ^3.0.0-beta.2
   avatar_glow: ^2.0.2
+  flutter_native_splash: ^2.3.5
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -53,6 +54,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.13.1"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -76,7 +78,22 @@ flutter:
   assets:
     - assets/video/
     - .env
+    - assets/icons/
   #   - images/a_dot_ham.jpeg
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/launcher_icon.jpeg"
+  min_sdk_android: 21
+
+flutter_native_splash:
+  color: "#000000"
+  image: "assets/icons/launcher_image.jpeg"
+  
+  android_12:
+    color: "#000000"
+    image: "assets/icons/launcher_image.jpeg"
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

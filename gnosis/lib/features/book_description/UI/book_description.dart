@@ -77,7 +77,7 @@ class _BookDescriptionPageState extends State<BookDescriptionPage> {
                                     ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                                 child: Image.memory(
                                   snapshot.data ?? Uint8List(0),
-                                  fit: BoxFit.fill,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             );
@@ -222,7 +222,7 @@ class _BookDescriptionPageState extends State<BookDescriptionPage> {
                   ),
                   Column(
                     children: [
-                      Text('About the Book', style: textTheme.titleLarge),
+                      Text('Synopsis', style: textTheme.titleLarge),
                       const SizedBox(
                         height: 10,
                       ),

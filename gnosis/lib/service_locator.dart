@@ -11,6 +11,7 @@ import 'package:gnosis/features/forgot_password/bloc/forgot_password_bloc.dart';
 import 'package:gnosis/features/home/bloc/home_bloc.dart';
 import 'package:gnosis/features/home_page/bloc/home_page_bloc.dart';
 import 'package:gnosis/features/home_page/repository/home_repo.dart';
+import 'package:gnosis/features/menu/bloc/menu_bloc.dart';
 import 'package:gnosis/features/notes_editor/bloc/notes_editor_bloc.dart';
 import 'package:gnosis/features/notes_page/bloc/notes_bloc.dart';
 import 'package:gnosis/features/notes_page/repository/notes_repo.dart';
@@ -39,6 +40,7 @@ void setup() {
   sl.registerFactory(() => NotesEditorBloc());
   sl.registerFactory(() => BookDescriptionBloc());
   sl.registerFactory(() => SearchBloc());
+  sl.registerFactory(() => MenuBloc());
 
   //repositories
   sl.registerSingletonWithDependencies<SignInRepository>(
